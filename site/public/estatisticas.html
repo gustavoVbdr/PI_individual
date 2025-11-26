@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vinland Saga</title>
     <link rel="stylesheet" href="style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 </head>
-
 <body>
     <header>
         <h1>Vinland Saga</h1>
@@ -48,8 +45,6 @@
     <div class="grafico">
         <canvas id="grafico_tentativas"></canvas>
     </div>
-
-
 </body>
 </html>
 <script>
@@ -59,33 +54,35 @@
         alert("Você precisa estar logado para ver as estatísticas.");
         window.location = "login.html";
     }
-
     var graficoTentativas = null;
 
     function carregarEstatisticas() {
-        fetch("/quiz/estatisticas/" + idUsuario)
+        fetch("/quiz/estatisticas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: idUsuario 
+            })
+        })
             .then(function (resposta) {
-
                 if (!resposta.ok || resposta.status == 204) {
-                    return [];
+                    return []
                 }
-
                 return resposta.json();
             })
             .then(function (dados) {
-
-                if (dados.length == 0) {
+                if (!dados || dados.length == 0) {
                     return;
                 }
-
-
                 var labels = [];
                 var dadosAcertos = [];
                 var dadosErros = [];
 
                 for (var i = 0; i < dados.length; i++) {
                     labels.push("Tentativa " + (i + 1));
-                    dadosAcertos.push(dados[i].acertos)
+                    dadosAcertos.push(dados[i].acertos);
                     dadosErros.push(dados[i].erros);
                 }
 
@@ -119,7 +116,6 @@
                 var ctx = grafico_tentativas.getContext("2d");
 
                 if (graficoTentativas != null) {
-                    // para não duplicar
                     graficoTentativas.destroy();
                 }
 
@@ -141,9 +137,12 @@
                         ]
                     }
                 });
+            })
+            .catch(function (erro) {
+                console.error("Erro ao buscar estatísticas: ", erro);
             });
     }
-
     window.onload = carregarEstatisticas;
 </script>
+
 

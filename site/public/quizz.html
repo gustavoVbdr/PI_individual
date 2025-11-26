@@ -49,7 +49,6 @@
                         <option value="0">“A guerra é necessária”</option>
                     </select>
                 </div>
-
                 <div class="caixaPergunta">
                     <h3>Pergunta 3:</h3><br>
                     <p>Quem matou o pai de Thorfinn?</p><br>
@@ -125,8 +124,7 @@
         var erros = 5 - acertos;
 
         pg_quiz_1.style.display = "none";
-        pg_quiz_2.style.display = "block";
-
+        pg_quiz_2.style.display = "block"
         if (acertos === 5) {
             resposta.innerHTML = "Acertou tudo! " + acertos + "/5";
         } else if (acertos > 2) {
@@ -149,9 +147,6 @@
             console.log("status do fetch do quiz:", resposta.status);
         })
     }
-
-
-
 
     function Voltar() {
         pg_quiz_1.style.display = "block";

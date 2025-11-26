@@ -1,5 +1,5 @@
-var quizModel = require("../models/quizModel");
 
+var quizModel = require("../models/quizModel");
 function cadastrarPontos(req, res) {
     var fkUsuario = req.body.fkUsuario;
     var acertos = req.body.acertos;
@@ -19,13 +19,11 @@ function cadastrarPontos(req, res) {
             .catch(function (erro) {
                 console.log("Erro ao cadastrar tentativa: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
-            });
+            })
     }
 }
-
-// essa é a função para o grafico
 function buscarEstatisticas(req, res) {
-    var idUsuario = req.params.idUsuario;
+    var idUsuario = req.body.idUsuario;
 
     if (idUsuario == undefined) {
         res.status(400).send("idUsuario está undefined!");
@@ -33,7 +31,7 @@ function buscarEstatisticas(req, res) {
         quizModel.listarTentativasPorUsuario(idUsuario)
             .then(function (resultado) {
                 if (resultado.length > 0) {
-                    res.status(200).json(resultado);
+                    res.status(200).json(resultado); 
                 } else {
                     res.status(204).send("Nenhuma tentativa encontrada!");
                 }
@@ -44,8 +42,9 @@ function buscarEstatisticas(req, res) {
             });
     }
 }
-
 module.exports = {
     cadastrarPontos,
     buscarEstatisticas
 };
+
+

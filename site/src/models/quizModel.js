@@ -9,7 +9,6 @@ function cadastrarTentativa(fkUsuario, acertos, erros) {
     console.log("Executando SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
- 
 function listarTentativasPorUsuario(fkUsuario) {
     var instrucao = `
         select 
