@@ -108,7 +108,7 @@
 </html>
 <script>
     var idUsuario = sessionStorage.ID_USUARIO;
-    var nomeUsuario = sessionStorage.NOME_USUARIO;
+    var nomeUsuario = sessionStorage.NOME_USUARIO
 
     if (!idUsuario || !nomeUsuario) {
         alert("Você precisa estar logado para fazer o quiz.");
@@ -118,10 +118,9 @@
     function Ver() {
         var p1 = Number(pergunta_1.value);
         var p2 = Number(pergunta_2.value);
-        var p3 = Number(pergunta_3.value);
+        var p3 = Number(pergunta_3.value)
         var p4 = Number(pergunta_4.value);
-        var p5 = Number(pergunta_5.value);
-
+        var p5 = Number(pergunta_5.value)
         var acertos = p1 + p2 + p3 + p4 + p5;
         var erros = 5 - acertos;
 
@@ -131,11 +130,10 @@
         if (acertos === 5) {
             resposta.innerHTML = "Acertou tudo! " + acertos + "/5";
         } else if (acertos > 2) {
-            resposta.innerHTML = "Acertou algumas hein! " + acertos + "/5";
+            resposta.innerHTML = "Acertou algumas hein! " + acertos + "/5"
         } else {
             resposta.innerHTML = "Errou a maioria, dá pra melhorar! " + acertos + "/5";
         }
-
         fetch("/quiz/registrar", {
             method: "POST",
             headers: {
@@ -149,15 +147,18 @@
             })
         }).then(function (resposta) {
             console.log("status do fetch do quiz:", resposta.status);
-        });
+        })
     }
+
+
+
 
     function Voltar() {
         pg_quiz_1.style.display = "block";
         pg_quiz_2.style.display = "none";
 
         pergunta_1.value = 0;
-        pergunta_2.value = 0;
+        pergunta_2.value = 0
         pergunta_3.value = 0;
         pergunta_4.value = 0;
         pergunta_5.value = 0;

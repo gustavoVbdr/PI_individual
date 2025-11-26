@@ -78,13 +78,14 @@
                     return;
                 }
 
+
                 var labels = [];
                 var dadosAcertos = [];
                 var dadosErros = [];
 
                 for (var i = 0; i < dados.length; i++) {
                     labels.push("Tentativa " + (i + 1));
-                    dadosAcertos.push(dados[i].acertos);
+                    dadosAcertos.push(dados[i].acertos)
                     dadosErros.push(dados[i].erros);
                 }
 
@@ -118,6 +119,7 @@
                 var ctx = grafico_tentativas.getContext("2d");
 
                 if (graficoTentativas != null) {
+                    // para não duplicar
                     graficoTentativas.destroy();
                 }
 
